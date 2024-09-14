@@ -10,8 +10,6 @@ export function FlowEditor() {
     const [ref] = useRete(createEditor);
 
     const addItem: AddItemFunction = async (itemType) => {
-        console.log(`'Add item: ${itemType}`);
-
         const node = createNode(itemType);
         await globalEditor.addNode(node);
     }
