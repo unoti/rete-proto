@@ -38,3 +38,17 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## How I created this
+To get started I used [Rete Kit](https://retejs.org/docs/development/rete-kit).  I tried using `react-vite` but struggled to get that going (in particular I couldn't get it to launch successfully). So I just used plain `react`.
+
+## Resources
+* [Rete documentation](https://retejs.org/docs/guides/basic)
+* [Rete react-plugin source (Github)](https://github.com/retejs/react-plugin)
+* [Rete chatbot example](https://codesandbox.io/p/sandbox/retejs-v2-chatbot-programming-f6tcnw)
+
+
+## Exploration
+* See [chatbot example](https://codesandbox.io/p/sandbox/retejs-v2-chatbot-programming-f6tcnw).  Notice there are socket types, and socket type incompatibility. How do they do that?
+    * see line 160 of editor.ts...
+* This thing is big and convoluted. There's gotta be a better way.
+    * [react-draggable](https://github.com/react-grid-layout/react-draggable)

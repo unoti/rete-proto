@@ -1,14 +1,64 @@
-.App {
+:root {
+  --primary-bg: #0b132b;
+  --primary-fg: #ffffff;
+  --secondary-bg: #1c2541;
+  --secondary-fg: #5bc0be;
+  --accent-bg: #3a506b;
+}
+
+.app-title {
   text-align: center;
+  background-color: #282c34;
+  color: white;
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+.flow-tools {
+  float: left;
+  height: 100%;
+  border: 1px dotted;
+}
+
+.flow-editor-outside {
+  display: grid;
+  grid-template-rows: 60px auto;
+  grid-template-columns: 15% 1fr;
+  height: 100vh;
+  grid-template-areas:
+    "title title"
+    "tools work";
+}
+
+.flow-editor {
+  float: left;
+  border: 1px solid green;
+}
+
+.title-bar {
+  grid-area: title;
+  background-color: var(--secondary-bg);
+  color: var(--secondary-fg);
+  text-align: center;
+  padding: 15px;
+}
+
+.tools {
+  grid-area: tools;
+  background-color: var(--accent-bg);
+  color: var(--secondary-fg);
+  padding: 20px;
+}
+
+.work-area {
+  grid-area: work;
+  background-color: var(--primary-bg);
+  color: var(--primary-fg);
 }

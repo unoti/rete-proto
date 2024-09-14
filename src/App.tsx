@@ -5,18 +5,14 @@ import './customization/background.css'
 import './App.css';
 import './rete.css';
 import { createEditor } from './rete';
+import { FlowEditor } from './components/FlowEditor';
 
 function App() {
-  const [ref] = useRete(createEditor)
-
   return (
     <div className="App">
-      <header className="App-header">
-        <h2>Flow POC</h2>
-        <div ref={ref} className="rete"></div>
-      </header>
+      <FlowEditor />
     </div>
-  );
+    );
 }
 
 export default App
