@@ -2,6 +2,8 @@
 Prototype/POC for using interactive diagrams to control workflows
 
 
+![screenshot](doc/img/screenshot-2024-09-14.png)
+
 ## Running in dev mode
 `npm start`
 
