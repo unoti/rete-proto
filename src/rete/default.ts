@@ -56,6 +56,30 @@ class AddNode extends Classic.Node {
   }
 }
 
+class KustoNode extends Classic.Node {
+  constructor() {
+    super('Kusto');
+
+    this.addInput('server', new Classic.Input(socket, 'server'));
+    this.addInput('q', new Classic.Input(socket, 'query'));
+    this.addOutput('result', new Classic.Output(socket, 'Result'));
+    this.addControl(
+      'result',
+      new Classic.InputControl('number', { initial: 0, readonly: true })
+    );
+  }
+}
+
+class LlmNode extends Classic.Node {
+  constructor() {
+    super('Llm');
+
+    this.addInput('prompt', new Classic.Input(socket, 'prompt'));
+    this.addInput('params', new Classic.Input(socket, 'params'));
+    this.addOutput('result', new Classic.Output(socket, 'Result'));
+  }
+}
+
 type AreaExtra = Area2D<Schemes> | ReactArea2D<Schemes> | ContextMenuExtra;
 
 const socket = new Classic.Socket('socket');
@@ -70,6 +94,8 @@ export async function createEditor(container: HTMLElement) {
     items: ContextMenuPresets.classic.setup([
       ['Number', () => new NumberNode(1)],
       ['Add', () => new AddNode()],
+      ['Kusto', () => new KustoNode()],
+      ['Llm', () => new LlmNode()],
     ]),
   });
 
@@ -87,10 +113,14 @@ export async function createEditor(container: HTMLElement) {
   const a = new NumberNode(1);
   const b = new NumberNode(1);
   const add = new AddNode();
+  const kustoNode = new KustoNode();
+  const llmNode = new LlmNode();
 
   await editor.addNode(a);
   await editor.addNode(b);
   await editor.addNode(add);
+  await editor.addNode(kustoNode);
+  await editor.addNode(llmNode);
 
   await editor.addConnection(new Connection(a, 'value', add, 'a'));
   await editor.addConnection(new Connection(b, 'value', add, 'b'));
@@ -98,6 +128,8 @@ export async function createEditor(container: HTMLElement) {
   await area.nodeViews.get(a.id)?.translate(100, 100);
   await area.nodeViews.get(b.id)?.translate(100, 300);
   await area.nodeViews.get(add.id)?.translate(400, 150);
+  await area.nodeViews.get(kustoNode.id)?.translate(650, 300);
+  await area.nodeViews.get(llmNode.id)?.translate(650, 600);
 
   return {
     destroy: () => area.destroy(),

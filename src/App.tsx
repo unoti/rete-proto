@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRete } from 'rete-react-plugin';
-import logo from './logo.svg';
 import './common.css'
 import './customization/background.css'
 import './App.css';
@@ -13,15 +12,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" style={{ animation: 'none' }} />
-        <a
-          className="App-link"
-          href="https://rete.js.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Rete.js
-        </a>
+        <h2>Flow POC</h2>
         <div ref={ref} className="rete"></div>
       </header>
     </div>

@@ -11,6 +11,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### Using the web app
+If you go to localhost:3000, you get the default template, code at `default.ts`.
+
+If you go to `localhost:3000/?template=customization` you will be running the code at `customization.ts`.
+
+
+### Code tour
+* NodeEditor - core of the editor. See example initialization in default.ts.
+
+
 ## Testing
 `npm test`
 
