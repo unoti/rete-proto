@@ -62,3 +62,10 @@
   background-color: var(--primary-bg);
   color: var(--primary-fg);
 }
+
+.toolbox-item {
+  display: block;
+  margin-bottom: 1em;
+  padding: 10px 10px 10px 10px;
+  min-width: 90%;
+}

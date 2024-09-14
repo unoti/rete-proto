@@ -84,8 +84,11 @@ type AreaExtra = Area2D<Schemes> | ReactArea2D<Schemes> | ContextMenuExtra;
 
 const socket = new Classic.Socket('socket');
 
+export let globalEditor: any = null; // egregious hack.  Will figure out a better way but don't yet understand useRete().
+
 export async function createEditor(container: HTMLElement) {
   const editor = new NodeEditor<Schemes>();
+  globalEditor = editor;
   const area = new AreaPlugin<Schemes, AreaExtra>(container);
   const connection = new ConnectionPlugin<Schemes, AreaExtra>();
   const reactRender = new ReactPlugin<Schemes, AreaExtra>({ createRoot });
@@ -109,27 +112,6 @@ export async function createEditor(container: HTMLElement) {
   connection.addPreset(ConnectionPresets.classic.setup());
   reactRender.addPreset(ReactPresets.classic.setup());
   reactRender.addPreset(ReactPresets.contextMenu.setup());
-
-  const a = new NumberNode(1);
-  const b = new NumberNode(1);
-  const add = new AddNode();
-  const kustoNode = new KustoNode();
-  const llmNode = new LlmNode();
-
-  await editor.addNode(a);
-  await editor.addNode(b);
-  await editor.addNode(add);
-  await editor.addNode(kustoNode);
-  await editor.addNode(llmNode);
-
-  await editor.addConnection(new Connection(a, 'value', add, 'a'));
-  await editor.addConnection(new Connection(b, 'value', add, 'b'));
-
-  await area.nodeViews.get(a.id)?.translate(100, 100);
-  await area.nodeViews.get(b.id)?.translate(100, 300);
-  await area.nodeViews.get(add.id)?.translate(400, 150);
-  await area.nodeViews.get(kustoNode.id)?.translate(650, 300);
-  await area.nodeViews.get(llmNode.id)?.translate(650, 600);
 
   return {
     destroy: () => area.destroy(),
