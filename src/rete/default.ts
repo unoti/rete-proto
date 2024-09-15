@@ -18,6 +18,13 @@ import {
   Presets as ContextMenuPresets,
 } from 'rete-context-menu-plugin';
 
+
+// This comes out of createEditor().
+export type CreateEditorResult = {
+  editor: NodeEditor<Schemes>; // This is what lets us access ability to add change and delete nodes from the editor.
+  destroy: () => void;
+}
+
 type Node = NumberNode | AddNode;
 type Conn =
   | Connection<NumberNode, AddNode>
@@ -84,11 +91,8 @@ type AreaExtra = Area2D<Schemes> | ReactArea2D<Schemes> | ContextMenuExtra;
 
 const socket = new Classic.Socket('socket');
 
-export let globalEditor: any = null; // egregious hack.  Will figure out a better way but don't yet understand useRete().
-
-export async function createEditor(container: HTMLElement) {
+export async function createEditor(container: HTMLElement): Promise<CreateEditorResult> {
   const editor = new NodeEditor<Schemes>();
-  globalEditor = editor;
   const area = new AreaPlugin<Schemes, AreaExtra>(container);
   const connection = new ConnectionPlugin<Schemes, AreaExtra>();
   const reactRender = new ReactPlugin<Schemes, AreaExtra>({ createRoot });
@@ -113,7 +117,9 @@ export async function createEditor(container: HTMLElement) {
   reactRender.addPreset(ReactPresets.classic.setup());
   reactRender.addPreset(ReactPresets.contextMenu.setup());
 
+  console.log('This is createEditor in default.ts')
   return {
+    editor,
     destroy: () => area.destroy(),
   };
 }
